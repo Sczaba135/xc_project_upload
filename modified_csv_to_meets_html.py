@@ -4,7 +4,7 @@ from pathlib import Path
 
 def csv_to_html(csv_filename, output_folder):
     # Derive the HTML filename by replacing the CSV extension with '.html' in the meets folder
-    html_filename = os.path.join(output_folder, os.path.splitext(os.path.basename(csv_filename))[0] + '.html')
+    html_filename = os.path.join(output_folder, os.path.splitext(os.path.basename(csv_filename))[0].replace("#", "") + '.html')
 
     # try:
     with open(csv_filename, mode='r', newline='', encoding='utf-8') as csvfile:
@@ -31,12 +31,14 @@ def csv_to_html(csv_filename, output_folder):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title class="no-hover">{link_text}</title>
 <link rel="stylesheet" href="../css/reset.css">
+<link href="../dist/css/lightbox.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/style.css">
 </head>
    <body>
    <nav>
+   <a href="#main-content" class="skip-to-content">Skip to main content</a>
      <ul>
-        <li><a href="file:///C:/Users/stanl/Desktop/339F2024/xc_data_tester/index.html">Home Page</a></li>
+        <li><a href="../index.html">Home Page</a></li>
         <li><a href="#summary">Summary</a></li>
         <li><a href="#team-results">Team Results</a></li>
         <li><a href="#individual-results">Individual Results</a></li>
@@ -61,7 +63,7 @@ def csv_to_html(csv_filename, output_folder):
                 document.body.classList.toggle('high-contrast');
             }}
         </script>
-           <a href="#main-content" class="skip-to-content">Skip to main content</a>
+        
     <main id="main-content">
    <header>
       <!--Meet Info-->
@@ -115,7 +117,10 @@ def csv_to_html(csv_filename, output_folder):
                 html_content += f"""
 <div class="athlete">
 <figure> 
-    <img src="../images/profiles/{profile_pic}" width="200" alt="Profile picture of {name}"> 
+    <a href = "../images/profiles/{profile_pic}" target="_blank" data-lightbox="athlete" data-title="{name}">
+
+        <img src="../images/profiles/{profile_pic}" width="200" alt="Profile picture of {name}"> 
+    </a>
     <figcaption>{name}</figcaption>
 </figure>
 <dl>
@@ -132,7 +137,7 @@ def csv_to_html(csv_filename, output_folder):
         """
 
 
-        html_content += create_meet_image_gallery(url)
+        html_content += create_meet_image_gallery(link_url)
         # Close the HTML document
         html_content += """
    </section>
@@ -149,6 +154,7 @@ def csv_to_html(csv_filename, output_folder):
 
 
                      </footer>
+        <script src="../dist/js/lightbox-plus-jquery.js"></script>
         </body>
 </html>
 """
@@ -197,6 +203,7 @@ def create_homepage(output_folder):
         if file.endswith('.html')
     ]
 
+
     # Homepage HTML structure with placeholders for meet links
     homepage_template = """
 <!DOCTYPE html>
@@ -204,31 +211,55 @@ def create_homepage(output_folder):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page - Meet Navigation</title>
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Meet Page</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+<nav>
+    <a href="#main-content" class="skip-link" tabindex="0">Skip to main content</a>
+    </nav>
+    <!-- FAB Buttons for Accessibility -->
+        <button class="fab fab-dark-mode" onclick="toggleDarkMode()">🌓</button>
+        <button class="fab fab-reduced-motion" onclick="toggleReducedMotion()">🎥</button>
+        <button class="fab fab-high-contrast" onclick="toggleHighContrast()">🔆</button>
+
+        <!-- JavaScript for Accessibility Features -->
+        <script>
+            function toggleDarkMode() {{
+                document.body.classList.toggle('dark-mode');
+            }}
+            function toggleReducedMotion() {{
+                document.body.classList.toggle('reduced-motion');
+            }}
+            function toggleHighContrast() {{
+                document.body.classList.toggle('high-contrast');
+            }}
+        </script>
+
+    <main id="main-content">
     <header>
-    <h1>Welcome to the Meet Navigation Page</h1>
-    <p>Select a meet page below to view its details:</p>
+    <section class="summary" id = "summary">
+        <h1>Welcome to the Meet Navigation Page</h1>
+        <p>Select a meet page below to view its details:</p>
+    </section>
 
     </header>
     
-    <table id='main-content' class='meet-table'>
-    <thead><tr><th>Meet Page Links</th></tr></thead>
-    <tbody>"""
+    <div class="data-list">
+    <h2>Meet Page Links</h2>
+    <ul class="data-item">"""
 
     # Adding each meet link as a table row
     for page in meet_pages:
         page_name = os.path.basename(page).replace('.html', '')
-        homepage_template +=  f"""<tr><td><a href='{page}'>{page_name}</a></td></tr>\n"""
+        homepage_template +=  f"""<li><a href='{page}'>{page_name}</a></li>\n"""
 
     # Closing the table and HTML document
     homepage_template += """
-    </tbody>
-    </table>
+    </ul>
+    </div>
+    </main>
     <footer>
                      <p>
                      Skyline High School<br>
@@ -323,15 +354,18 @@ def create_meet_image_gallery(url):
     meet_id = extract_meet_id(url)
     # Define the folder path for images based on the meet ID
     folder_path = f'images/meets/{meet_id}/{meet_id}/'
+    new_folder_path = f'xc_data_tester/images/meets/{meet_id}/{meet_id}/'
 
-    # print(f"The folder path is {folder_path}")
-    
-    if not os.path.exists(folder_path):
+    #print(f"The folder path is {folder_path}")
+    #print(os.getcwd())
+
+    if not os.path.exists(new_folder_path):
         return ""
         raise FileNotFoundError(f"The folder {folder_path} does not exist.")
     
     # Select 12 random photos
-    selected_photos = select_random_photos(folder_path)
+    selected_photos = select_random_photos(new_folder_path)
+    print(selected_photos)
     
     # Generate image tags
     html_image_tags = generate_image_tags(selected_photos, folder_path)
