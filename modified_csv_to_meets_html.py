@@ -36,7 +36,7 @@ def csv_to_html(csv_filename, output_folder):
 </head>
    <body>
    <nav>
-   <a href="#main-content" class="skip-to-content">Skip to main content</a>
+   <a href="#main-content" class="skip-to-content" tabindex="0">Skip to main content</a>
      <ul>
         <li><a href="../index.html">Home Page</a></li>
         <li><a href="#summary">Summary</a></li>
@@ -65,20 +65,20 @@ def csv_to_html(csv_filename, output_folder):
         </script>
         
     <main id="main-content">
-   <header>
-      <!--Meet Info-->
+        <header>
+            <!--Meet Info-->
        
-        <h1><a href="{link_url}">{link_text}</a></h1>
-        <h2>{h2_text}</h2>
-</header>
+            <h1><a href="{link_url}">{link_text}</a></h1>
+            <h2>{h2_text}</h2>
+        </header>
    
 
 
-    <section class="summary" id = "summary">
-      <h2>Race Summary</h2>
-      {summary_text}
-    </section>
-"""
+        <section class="summary" id = "summary">
+            <h2>Race Summary</h2>
+            {summary_text}
+        </section>
+        """
 
 
         # Start container for individual results
@@ -131,15 +131,16 @@ def csv_to_html(csv_filename, output_folder):
 </div>
 """
 
-        html_content += """</section>\n
-        <section id = "gallery">
-        <h2>Gallery</h2>
-        """
+        if type(link_url) != type(None):
+            html_content += """</section>\n
+            <section id = "gallery">
+            <h2>Gallery</h2>
+            """
 
 
-        html_content += create_meet_image_gallery(link_url)
-        # Close the HTML document
-        html_content += """
+            html_content += create_meet_image_gallery(link_url)
+            # Close the HTML document
+            html_content += """
    </section>
    </main>   
    <footer>
@@ -154,7 +155,65 @@ def csv_to_html(csv_filename, output_folder):
 
 
                      </footer>
+        <script>
+            document.querySelectorAll('img').forEach(img => {
+                img.onerror = function() {
+                    this.onerror = null; // Prevents infinite loop if default image missing
+                    this.src = '../images/default_image.jpg';
+                    this.alt = "Default Runner"
+                };
+            });
+        </script>
+
+        <script>
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.body.classList.add('dark-mode');
+}
+
+// Check and apply reduced motion based on system preference
+if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.body.classList.add('reduced-motion');
+}
+
+// Listen for changes in system dark mode preference
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+    if (event.matches) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+});
+        
+        </script>
+<script>
+// Detect system preference for reduced motion
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Disable lightbox if reduced motion is preferred
+if (!prefersReducedMotion) {
+    // Initialize lightbox only if reduced motion is not preferred
+    document.querySelectorAll('a[data-lightbox]').forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault();
+            // Code to open lightbox here, e.g., lightbox.open(link.href);
+        });
+    });
+} else {
+    // If reduced motion is preferred, disable lightbox functionality
+    document.querySelectorAll('a[data-lightbox]').forEach(link => {
+        link.removeAttribute('data-lightbox');
+        link.addEventListener('click', event => {
+            event.preventDefault(); // Prevents lightbox from opening
+            alert('Lightbox effects are disabled due to reduced motion preference.');
+        });
+    });
+}
+</script>
+
+
         <script src="../dist/js/lightbox-plus-jquery.js"></script>
+
         </body>
 </html>
 """
@@ -217,7 +276,7 @@ def create_homepage(output_folder):
 </head>
 <body>
 <nav>
-    <a href="#main-content" class="skip-link" tabindex="0">Skip to main content</a>
+    <a href="#main-content" class="skip-to-content" tabindex="0">Skip to main content</a>
     </nav>
     <!-- FAB Buttons for Accessibility -->
         <button class="fab fab-dark-mode" onclick="toggleDarkMode()">🌓</button>
@@ -275,6 +334,42 @@ def create_homepage(output_folder):
 
 
 </body>
+<script>
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.body.classList.add('dark-mode');
+}
+
+// Check and apply reduced motion based on system preference
+if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.body.classList.add('reduced-motion');
+}
+
+// Listen for changes in system dark mode preference
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+    if (event.matches) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+});
+</script>
+<script>
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Disable lightbox if reduced motion is preferred
+if (prefersReducedMotion) {
+    // If reduced motion is preferred, disable lightbox functionality
+    document.querySelectorAll('a[data-lightbox]').forEach(link => {
+        link.removeAttribute('data-lightbox');
+        link.addEventListener('click', event => {
+            event.preventDefault(); // Prevents lightbox from opening
+            alert('Lightbox effects are disabled due to reduced motion preference.');
+        });
+    });
+} 
+
+</script>
 </html>
 """
 
@@ -317,7 +412,7 @@ import random
 def extract_meet_id(url):
     # Regex to extract the meet ID, which is the number right after '/meet/'
     match = re.search(r"/meet/(\d+)", url)
-    print(f"The meet id is {match}")
+    print(f"The meet id is {match.group(1)}")
     if match:
         print(f"REturning {match.group(1)}")
         return match.group(1)
@@ -346,7 +441,7 @@ def generate_image_tags(image_files, folder_path):
     for img in image_files:
         img_path = os.path.join(folder_path, img)
         # print(f"The image_path is {img_path}")
-        img_tags.append(f'<img src=../{img_path} width = "200" alt="">')
+        img_tags.append(f'<a href = "../{img_path}"  target="_blank" data-lightbox="gallery" data-title="Image from meet">\n   <img src=../{img_path} width = "200" alt="Random Cross Country Runner">\n</a>')
     return "\n".join(img_tags)
 
 # Putting it all together
@@ -355,12 +450,13 @@ def create_meet_image_gallery(url):
     # Define the folder path for images based on the meet ID
     folder_path = f'images/meets/{meet_id}/{meet_id}/'
     new_folder_path = f'xc_data_tester/images/meets/{meet_id}/{meet_id}/'
+    print("this is the new folder path:" + new_folder_path)
 
     #print(f"The folder path is {folder_path}")
     #print(os.getcwd())
 
     if not os.path.exists(new_folder_path):
-        return ""
+        return print(f"The folder {folder_path} does not exist.")
         raise FileNotFoundError(f"The folder {folder_path} does not exist.")
     
     # Select 12 random photos
