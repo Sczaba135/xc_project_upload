@@ -40,20 +40,20 @@
         </script>
         
     <main id="main-content">
-   <header>
-      <!--Meet Info-->
+        <header>
+            <!--Meet Info-->
        
-        <h1><a href="https://www.athletic.net/CrossCountry/meet/236877/results/947093">Jackson Invitational Womens 5000 Meters Orange Division (1000 + enrolment)</a></h1>
-        <h2>Sat Sep 21 2024</h2>
-</header>
+            <h1><a href="https://www.athletic.net/CrossCountry/meet/236877/results/947093">Jackson Invitational Womens 5000 Meters Orange Division (1000 + enrolment)</a></h1>
+            <h2>Sat Sep 21 2024</h2>
+        </header>
    
 
 
-    <section class="summary" id = "summary">
-      <h2>Race Summary</h2>
-      <p>The Skyline girls cross country team took on the Jackson Invitational bright and early, showcasing their grit and determination despite the fact that most of us were still rolling out of bed. Racing in the cool morning air, the girls gave it their all and finished a solid 19th out of 29 teams—proof that Skyline doesn’t just rise early, they rise to the occasion.</p><p>Leading the team was <span class="athlete">Becca Van Lent</span>, who powered through the course to finish with a time of <span class="time">19:57.87</span>, setting the pace for her teammates. Not far behind was <span class="athlete">Isla Tharp</span>, clocking in at <span class="time">20:12.31</span> with a personal record, and she certainly earned her spot at the breakfast table.</p><p>Continuing the strong effort, <span class="athlete">Lila Edison</span> crossed the finish line with a personal best of <span class="time">20:46.19</span>, while <span class="athlete">Alison Kauffman</span> made her mark with a time of <span class="time">21:38.28</span>. The pack was rounded out by <span class="athlete">Mara Mocanu</span>, who finished in <span class="time">21:40.87</span>, securing Skyline’s position for the day.</p>
-    </section>
-<section id="team-results">
+        <section class="summary" id = "summary">
+            <h2>Race Summary</h2>
+            <p>The Skyline girls cross country team took on the Jackson Invitational bright and early, showcasing their grit and determination despite the fact that most of us were still rolling out of bed. Racing in the cool morning air, the girls gave it their all and finished a solid 19th out of 29 teams—proof that Skyline doesn’t just rise early, they rise to the occasion.</p><p>Leading the team was <span class="athlete">Becca Van Lent</span>, who powered through the course to finish with a time of <span class="time">19:57.87</span>, setting the pace for her teammates. Not far behind was <span class="athlete">Isla Tharp</span>, clocking in at <span class="time">20:12.31</span> with a personal record, and she certainly earned her spot at the breakfast table.</p><p>Continuing the strong effort, <span class="athlete">Lila Edison</span> crossed the finish line with a personal best of <span class="time">20:46.19</span>, while <span class="athlete">Alison Kauffman</span> made her mark with a time of <span class="time">21:38.28</span>. The pack was rounded out by <span class="athlete">Mara Mocanu</span>, who finished in <span class="time">21:40.87</span>, securing Skyline’s position for the day.</p>
+        </section>
+        <section id="team-results">
 
         <h2>Team Results</h2><table>
 <tr><th>Place</th><th>Team</th><th>Score</th></tr>
@@ -245,6 +245,16 @@
 
 
                      </footer>
+        <script>
+            document.querySelectorAll('img').forEach(img => {
+                img.onerror = function() {
+                    this.onerror = null; // Prevents infinite loop if default image missing
+                    this.src = '../images/default_image.jpg';
+                    this.alt = "Default Runner"
+                };
+            });
+        </script>
+
         <script src="../dist/js/lightbox-plus-jquery.js"></script>
         </body>
 </html>

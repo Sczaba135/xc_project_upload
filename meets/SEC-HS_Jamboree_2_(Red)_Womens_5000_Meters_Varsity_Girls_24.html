@@ -40,20 +40,20 @@
         </script>
         
     <main id="main-content">
-   <header>
-      <!--Meet Info-->
+        <header>
+            <!--Meet Info-->
        
-        <h1><a href="https://www.athletic.net/CrossCountry/meet/238857/results/954244">SEC-HS Jamboree #2 (Red) Womens 5000 Meters Varsity Girls</a></h1>
-        <h2>Tue Sep 24 2024</h2>
-</header>
+            <h1><a href="https://www.athletic.net/CrossCountry/meet/238857/results/954244">SEC-HS Jamboree #2 (Red) Womens 5000 Meters Varsity Girls</a></h1>
+            <h2>Tue Sep 24 2024</h2>
+        </header>
    
 
 
-    <section class="summary" id = "summary">
-      <h2>Race Summary</h2>
-      <p>The Skyline girls cross country team took on some fierce competition at the SEC-HS Jamboree #2 and delivered an impressive 5th-place finish, showing that they’ve got the speed and stamina to hang with the best.</p><p>Leading the charge was freshman standout <span class="athlete">Lucia Llanes</span>, who sprinted across the line with a time of <span class="time">19:19.90</span>, earning herself a spot in the top 10. Not far behind, sophomore duo <span class="athlete">Isla Tharp</span> and <span class="athlete">Becca Van Lent</span> finished in <span class="time">20:17.00</span> and <span class="time">20:17.60</span>, respectively.</p><p>Senior <span class="athlete">Ayla Balazer</span> crossed the line in <span class="time">22:20.30</span>, while sophomore <span class="athlete">Alison Kauffman</span> rounded out the top five with a time of <span class="time">22:09.70</span>.</p>
-    </section>
-<section id="team-results">
+        <section class="summary" id = "summary">
+            <h2>Race Summary</h2>
+            <p>The Skyline girls cross country team took on some fierce competition at the SEC-HS Jamboree #2 and delivered an impressive 5th-place finish, showing that they’ve got the speed and stamina to hang with the best.</p><p>Leading the charge was freshman standout <span class="athlete">Lucia Llanes</span>, who sprinted across the line with a time of <span class="time">19:19.90</span>, earning herself a spot in the top 10. Not far behind, sophomore duo <span class="athlete">Isla Tharp</span> and <span class="athlete">Becca Van Lent</span> finished in <span class="time">20:17.00</span> and <span class="time">20:17.60</span>, respectively.</p><p>Senior <span class="athlete">Ayla Balazer</span> crossed the line in <span class="time">22:20.30</span>, while sophomore <span class="athlete">Alison Kauffman</span> rounded out the top five with a time of <span class="time">22:09.70</span>.</p>
+        </section>
+        <section id="team-results">
 
         <h2>Team Results</h2><table>
 <tr><th>Place</th><th>Team</th><th>Score</th></tr>
@@ -208,6 +208,16 @@
 
 
                      </footer>
+        <script>
+            document.querySelectorAll('img').forEach(img => {
+                img.onerror = function() {
+                    this.onerror = null; // Prevents infinite loop if default image missing
+                    this.src = '../images/default_image.jpg';
+                    this.alt = "Default Runner"
+                };
+            });
+        </script>
+
         <script src="../dist/js/lightbox-plus-jquery.js"></script>
         </body>
 </html>

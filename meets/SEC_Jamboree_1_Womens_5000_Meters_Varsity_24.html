@@ -40,20 +40,20 @@
         </script>
         
     <main id="main-content">
-   <header>
-      <!--Meet Info-->
+        <header>
+            <!--Meet Info-->
        
-        <h1><a href="https://www.athletic.net/CrossCountry/meet/238311/results/952328">SEC Jamboree #1 Womens 5000 Meters Varsity</a></h1>
-        <h2>Tue Sep 10 2024</h2>
-</header>
+            <h1><a href="https://www.athletic.net/CrossCountry/meet/238311/results/952328">SEC Jamboree #1 Womens 5000 Meters Varsity</a></h1>
+            <h2>Tue Sep 10 2024</h2>
+        </header>
    
 
 
-    <section class="summary" id = "summary">
-      <h2>Race Summary</h2>
-      <p>Ann Arbor Skyline’s varsity girls placed 6th overall, led by a standout performance from <span class="athlete">Lucia Llanes</span>, who set a personal record (PR) of <span class="time">19:05.20</span> and finished 8th overall. Following her was <span class="athlete">Irie Scrase</span>, finishing in <span class="time">20:25.80</span>. Other key contributors included <span class="athlete">Mara Mocanu</span> (<span class="time">22:31.20</span>), <span class="athlete">Alison Kauffman</span> (<span class="time">23:32.40</span>), and <span class="athlete">Elin Tenbrink</span> (<span class="time">24:09.40</span>). The team's efforts secured them a competitive score against strong opponents.</p>
-    </section>
-<section id="team-results">
+        <section class="summary" id = "summary">
+            <h2>Race Summary</h2>
+            <p>Ann Arbor Skyline’s varsity girls placed 6th overall, led by a standout performance from <span class="athlete">Lucia Llanes</span>, who set a personal record (PR) of <span class="time">19:05.20</span> and finished 8th overall. Following her was <span class="athlete">Irie Scrase</span>, finishing in <span class="time">20:25.80</span>. Other key contributors included <span class="athlete">Mara Mocanu</span> (<span class="time">22:31.20</span>), <span class="athlete">Alison Kauffman</span> (<span class="time">23:32.40</span>), and <span class="athlete">Elin Tenbrink</span> (<span class="time">24:09.40</span>). The team's efforts secured them a competitive score against strong opponents.</p>
+        </section>
+        <section id="team-results">
 
         <h2>Team Results</h2><table>
 <tr><th>Place</th><th>Team</th><th>Score</th></tr>
@@ -153,31 +153,7 @@
 
         <section id = "gallery">
         <h2>Gallery</h2>
-        <img src=../images/meets/238311/238311/IMG_9285.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9322.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9296.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9248.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9303.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9280.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9311.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9289.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9331.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9279.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9338.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9332.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9329.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9253.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9264.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9304.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9315.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9257.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9288.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9337.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9333.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9334.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9325.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9271.jpg width = "200" alt="">
-<img src=../images/meets/238311/238311/IMG_9324.jpg width = "200" alt="">
+        
    </section>
    </main>   
    <footer>
@@ -192,6 +168,16 @@
 
 
                      </footer>
+        <script>
+            document.querySelectorAll('img').forEach(img => {
+                img.onerror = function() {
+                    this.onerror = null; // Prevents infinite loop if default image missing
+                    this.src = '../images/default_image.jpg';
+                    this.alt = "Default Runner"
+                };
+            });
+        </script>
+
         <script src="../dist/js/lightbox-plus-jquery.js"></script>
         </body>
 </html>

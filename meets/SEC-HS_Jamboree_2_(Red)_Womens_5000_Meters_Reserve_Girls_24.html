@@ -40,20 +40,20 @@
         </script>
         
     <main id="main-content">
-   <header>
-      <!--Meet Info-->
+        <header>
+            <!--Meet Info-->
        
-        <h1><a href="https://www.athletic.net/CrossCountry/meet/238857/results/954246">SEC-HS Jamboree #2 (Red) Womens 5000 Meters Reserve Girls</a></h1>
-        <h2>Tue Sep 24 2024</h2>
-</header>
+            <h1><a href="https://www.athletic.net/CrossCountry/meet/238857/results/954246">SEC-HS Jamboree #2 (Red) Womens 5000 Meters Reserve Girls</a></h1>
+            <h2>Tue Sep 24 2024</h2>
+        </header>
    
 
 
-    <section class="summary" id = "summary">
-      <h2>Race Summary</h2>
-      <p>The Skyline girls reserve cross country team delivered an impressive performance at the SEC-HS Jamboree #2, finishing strong in 2nd place overall. The team showcased their depth and determination, pushing through the competition to place right behind Saline.</p><p><span class="athlete">Gwen Stotts-Walshe</span> led the charge, finishing with a personal record of <span class="time">22:20.60</span>. Freshman <span class="athlete">Violet Olley</span> clocked in at <span class="time">23:07.20</span> for a personal best, followed closely by junior <span class="athlete">Adrienne Stewart</span> at <span class="time">23:07.70</span>.</p> <p>Sophomore <span class="athlete">Pia Odell</span> hit a personal best of <span class="time">24:09.90</span>, with junior <span class="athlete">Ruthie Scott</span> finishing in <span class="time">24:45.30</span>, rounding out a solid team effort.</p>
-    </section>
-<section id="team-results">
+        <section class="summary" id = "summary">
+            <h2>Race Summary</h2>
+            <p>The Skyline girls reserve cross country team delivered an impressive performance at the SEC-HS Jamboree #2, finishing strong in 2nd place overall. The team showcased their depth and determination, pushing through the competition to place right behind Saline.</p><p><span class="athlete">Gwen Stotts-Walshe</span> led the charge, finishing with a personal record of <span class="time">22:20.60</span>. Freshman <span class="athlete">Violet Olley</span> clocked in at <span class="time">23:07.20</span> for a personal best, followed closely by junior <span class="athlete">Adrienne Stewart</span> at <span class="time">23:07.70</span>.</p> <p>Sophomore <span class="athlete">Pia Odell</span> hit a personal best of <span class="time">24:09.90</span>, with junior <span class="athlete">Ruthie Scott</span> finishing in <span class="time">24:45.30</span>, rounding out a solid team effort.</p>
+        </section>
+        <section id="team-results">
 
         <h2>Team Results</h2><table>
 <tr><th>Place</th><th>Team</th><th>Score</th></tr>
@@ -341,6 +341,16 @@
 
 
                      </footer>
+        <script>
+            document.querySelectorAll('img').forEach(img => {
+                img.onerror = function() {
+                    this.onerror = null; // Prevents infinite loop if default image missing
+                    this.src = '../images/default_image.jpg';
+                    this.alt = "Default Runner"
+                };
+            });
+        </script>
+
         <script src="../dist/js/lightbox-plus-jquery.js"></script>
         </body>
 </html>

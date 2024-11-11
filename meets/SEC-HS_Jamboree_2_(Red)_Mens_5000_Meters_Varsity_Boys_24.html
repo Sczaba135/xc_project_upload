@@ -40,20 +40,20 @@
         </script>
         
     <main id="main-content">
-   <header>
-      <!--Meet Info-->
+        <header>
+            <!--Meet Info-->
        
-        <h1><a href="https://www.athletic.net/CrossCountry/meet/238857/results/954243">SEC-HS Jamboree #2 (Red) Mens 5000 Meters Varsity Boys</a></h1>
-        <h2>Tue Sep 24 2024</h2>
-</header>
+            <h1><a href="https://www.athletic.net/CrossCountry/meet/238857/results/954243">SEC-HS Jamboree #2 (Red) Mens 5000 Meters Varsity Boys</a></h1>
+            <h2>Tue Sep 24 2024</h2>
+        </header>
    
 
 
-    <section class="summary" id = "summary">
-      <h2>Race Summary</h2>
-      <p>The Skyline boys cross country team hit the ground running—literally—at the SEC-HS Jamboree #2, taking on some tough competition at Pioneer High School. With a 4th-place finish out of 8 teams, Skyline's runners proved once again that they can hold their own in the fiercely competitive SEC Red division.</p> <p>Leading the charge for Skyline was <span class="athlete">Nicholas Yuan</span>, who dashed through the course with a time of <span class="time">17:20.70</span>, setting the tone for the rest of the team. Not far behind, <span class="athlete">Bruno Cifaldi</span> finished with a solid <span class="time">17:32.20</span>, followed closely by <span class="athlete">Matthew Guikema</span> at <span class="time">17:39.10</span>.</p><p><span class="athlete">Oskar MacArthur</span> also made his mark, crossing the finish line in <span class="time">17:39.40</span>. Wrapping up the top five for Skyline was <span class="athlete">Jack Robichaud</span> at <span class="time">17:46.60</span>, proving Skyline's strength in depth.</p>
-    </section>
-<section id="team-results">
+        <section class="summary" id = "summary">
+            <h2>Race Summary</h2>
+            <p>The Skyline boys cross country team hit the ground running—literally—at the SEC-HS Jamboree #2, taking on some tough competition at Pioneer High School. With a 4th-place finish out of 8 teams, Skyline's runners proved once again that they can hold their own in the fiercely competitive SEC Red division.</p> <p>Leading the charge for Skyline was <span class="athlete">Nicholas Yuan</span>, who dashed through the course with a time of <span class="time">17:20.70</span>, setting the tone for the rest of the team. Not far behind, <span class="athlete">Bruno Cifaldi</span> finished with a solid <span class="time">17:32.20</span>, followed closely by <span class="athlete">Matthew Guikema</span> at <span class="time">17:39.10</span>.</p><p><span class="athlete">Oskar MacArthur</span> also made his mark, crossing the finish line in <span class="time">17:39.40</span>. Wrapping up the top five for Skyline was <span class="athlete">Jack Robichaud</span> at <span class="time">17:46.60</span>, proving Skyline's strength in depth.</p>
+        </section>
+        <section id="team-results">
 
         <h2>Team Results</h2><table>
 <tr><th>Place</th><th>Team</th><th>Score</th></tr>
@@ -223,6 +223,16 @@
 
 
                      </footer>
+        <script>
+            document.querySelectorAll('img').forEach(img => {
+                img.onerror = function() {
+                    this.onerror = null; // Prevents infinite loop if default image missing
+                    this.src = '../images/default_image.jpg';
+                    this.alt = "Default Runner"
+                };
+            });
+        </script>
+
         <script src="../dist/js/lightbox-plus-jquery.js"></script>
         </body>
 </html>
