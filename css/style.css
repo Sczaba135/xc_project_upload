@@ -14,6 +14,26 @@
 /* ============================== */
 /*     Dark Mode and Accessibility Support    */
 /* ============================== */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    body .dark-mode { /* Uses your existing dark mode settings */
+        --bg-color: #121212;
+        --text-color: #f9f9f9;
+        --highlight-color: #00626f;
+        --secondary-color: rgb(53, 53, 53);
+        --card-bg: #1e1e1e;
+        --alt-bg: #2a2a2a;
+        --high-contrast-text: #fff;
+    }
+}
+
+
 .dark-mode {
     --bg-color: #121212;
     --text-color: #f9f9f9;
@@ -22,6 +42,9 @@
     --card-bg: #1e1e1e;
     --alt-bg: #2a2a2a;
     --high-contrast-text: #fff;
+}
+.dark-mode nav{
+    background-color: #00626f;
 }
 
 /* Reduced Motion */
@@ -122,9 +145,6 @@ body {
     align-items: center;
 }
 
-main {
-    padding-top: 60px;
-}
 
 .container {
     width: 90%;
@@ -147,6 +167,12 @@ header {
     text-align: center;
     position: sticky; /* Ensure it stays within flow */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 0;
+
+}
+
+header .summary{
+    display: inline-block;
 }
 
 header a {
@@ -170,25 +196,105 @@ header nav a {
 header nav a:hover, header nav a:focus {
     background-color: var(--secondary-color);
 }
-
-/* ============================== */
-/*          Skip Link             */
-/* ============================== */
+/* Base styling for the nav container - Mobile-friendly by default */
+nav {
+    background-color: #0073e6;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows wrapping for smaller screens */
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+ 
+  /* Styling for the ul inside nav - Mobile-friendly by default */
+  nav ul {
+    display: flex;
+    flex-direction: column; /* Stack links vertically */
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+  /* Styling for each link item */
+  nav ul li {
+    width: 100%; /* Full width on mobile */
+    text-align: center;
+    margin: 0.5rem 0; /* Spacing between links */
+  }
+  
+  /* Styling for each a link inside li */
+  nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: block;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  /* Hover effect */
+  nav ul li a:hover {
+    background-color: #005bb5;
+  }
+  
+  /* Active link styling */
+  nav ul li a.active {
+    background-color: #ffffff;
+    color: #0073e6;
+  }
+  
+  /* Media query for larger screens (min-width: 800px) */
+  @media (min-width: 800px) {
+    nav {
+      justify-content: space-between;
+    }
+  
+    nav ul {
+      flex-direction: row; /* Arrange links horizontally */
+      justify-content: space-around;
+    }
+  
+    nav ul li {
+      flex-grow: 1; /* Distribute space evenly across links */
+      margin: 0;
+      width: auto;
+    }
+  }
+  
+  /* Initially hide the skip-to-content link off-screen */
 .skip-to-content {
     position: absolute;
-    top: 0px;
-    left: 0;
+    top: -9999px;
+    right: -9999px;
     background-color: #000;
     color: #fff;
     padding: 8px 12px;
     z-index: 100;
     text-decoration: none;
     transition: top 0.3s ease;
-}
+  }
+  
+  /* Show the link in a compact black and white box in the top-right corner when focused */
+  .skip-to-content:focus {
+    position: fixed;
+    top: 10px; /* Distance from the top */
+    right: 10px; /* Distance from the right */
+    z-index: 1000; /* Ensure it appears above other content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for emphasis */
+  }
+  
 
-.skip-to-content:focus {
-    top: 10px;
-}
+/* ============================== */
+/*          Skip Link             */
+/* ============================== */
+
+
+
 
 /* ============================== */
 /*          Floating Action Buttons       */
@@ -233,17 +339,11 @@ figcaption {
     font-style: italic;
 }
 
-.meet-list li {
-    padding: 1em;
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%;
-    margin: 1em auto;
-    text-align: center;
-}
-
+.data-item {
+    display: inline-block; /* Keeps links in a single line */
+    justify-content: center; /* Centers links horizontally */
+  }
+  
 /* ============================== */
 /*        Tables and Forms        */
 /* ============================== */
@@ -344,20 +444,26 @@ dt, dd {
 
 .data-item {
     padding: 1em;
-    border-bottom: 1px solid var(--highlight-color);
     margin: 1em; /* Adds margin around each item */
     display: flex;
     flex-wrap: wrap; /* Allows content to wrap */
-    gap: 0.5em; /* Space between items when wrapping */
-}
-.data-item a {
-    word-break: break-all; /* Breaks words at any point to prevent overflow */
-    overflow-wrap: anywhere; /* Allows wrapping at any point if necessary */
-}
+    width:auto;
+    overflow: hidden;
+    
+ }
+ .data-item li{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    
+    align-items: center; /* Centers items vertically within each cell */
+ }
+ .data-item a{
+    grid-column: 2 / 3;
 
-.data-item:last-child {
-    border-bottom: none; /* Remove border on last item */
-}
+ }
+
+
+ 
 
 .label {
     font-weight: bold;
@@ -366,8 +472,49 @@ dt, dd {
     min-width: 40%; /* Adjust width as needed */
 }
 
-.data-item span {
-    color: var(--secondary-color);
-    flex: 1; /* Allows the content to wrap under the label */
-    word-break: break-word; /* Ensures long words or URLs wrap */
-}
+
+img {
+    padding: 4px; /* Adds inner space */
+    background-color: #fff; /* Inner background color */
+    border: 2px solid #0073e6; /* Main border around padding */
+    border-radius: 8px;
+  }
+
+  #gallery {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+    gap: 16px; /* Space between images */
+  }
+  
+
+  /* Base styling for athlete images (single column by default) */
+  #individual-results {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+    gap: 16px;
+  }
+  
+  
+  
+  /* Media query for larger screens (800px and up) */
+  @media (min-width: 800px) {
+    /* Two-column grid for gallery images */
+    #gallery {
+      grid-template-columns: 1fr 1fr 1fr; /* Two columns on larger screens */
+    }
+  
+    /* Four-column grid for athlete items */
+    #individual-results {
+      grid-template-columns: repeat(4, 1fr); /* Four columns for athlete images */
+    }
+  
+    /* Make the first item in the gallery span across both columns */
+    #gallery :nth-child(1) {
+      grid-column: 1 / -1; /* Span across all columns */
+    }
+  
+    /* Make the first item in individual results span across all four columns */
+    #individual-results :nth-child(1) {
+      grid-column: 1 / -1; /* Span across all columns */
+    }
+  }
