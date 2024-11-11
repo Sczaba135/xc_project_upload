@@ -112,6 +112,10 @@
     color: #ff0; /* Bright yellow for high contrast */
 }
 
+.high-contrast nav{
+    background-color: #950000;;
+}
+
 .high-contrast a:hover {
     color: #ffc700;
 }
